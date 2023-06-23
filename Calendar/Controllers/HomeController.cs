@@ -1,5 +1,8 @@
-﻿using Calendar.Models;
+﻿using Calendar.Data;
+using Calendar.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Collections;
 using System.Diagnostics;
 
 namespace Calendar.Controllers
@@ -7,6 +10,7 @@ namespace Calendar.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly CalendarDbContext _db = new CalendarDbContext();
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -15,7 +19,8 @@ namespace Calendar.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            Doctor doctor = _db.Doctors.First(x => x.Id == 1);
+            return View(doctor);
         }
 
         public IActionResult Privacy()
