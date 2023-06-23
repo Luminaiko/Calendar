@@ -19,8 +19,8 @@ namespace Calendar.Controllers
 
         public IActionResult Index()
         {
-            Doctor doctor = _db.Doctors.First(x => x.Id == 1);
-            return View(doctor);
+            //Doctor doctor = _db.Doctors.First(x => x.Id == 1);
+            return View();
         }
 
         public IActionResult Privacy()

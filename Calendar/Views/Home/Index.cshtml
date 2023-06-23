@@ -1,8 +1,45 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
-@model Doctor
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>@Model.Name</p>
-</div>
+﻿<!DOCTYPE html>
+<!-- Coding By CodingNepal - youtube.com/codingnepal -->
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <title>Dynamic Calendar JavaScript | CodingNepal</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google Font Link for Icons -->
+    <link rel="stylesheet" href="~/css/site.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <script src="~/js/calendarScript.js" defer></script>
+    <div class="wrapper">
+        <header>
+            <p class="current-date"></p>
+            <div class="icons">
+                <span id="prev" class="material-symbols-rounded"><</span>
+                <span id="next" class="material-symbols-rounded">></span>
+            </div>
+        </header>
+        <div class="calendar">
+            <ul class="weeks">
+                <li>Вск</li>
+                <li>Пон</li>
+                <li>Втр</li>
+                <li>Сре</li>
+                <li>Чет</li>
+                <li>Пят</li>
+                <li>Суб</li>
+                @*<li>Sun</li>
+                <li>Mon</li>
+                <li>Tue</li>
+                <li>Wed</li>
+                <li>Thu</li>
+                <li>Fri</li>
+                <li>Sat</li>*@
+            </ul>
+            <ul class="days"></ul>
+        </div>
+    </div>
+
+</body>
+</html>
