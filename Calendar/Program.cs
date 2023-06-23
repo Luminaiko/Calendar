@@ -1,7 +1,12 @@
+using Calendar.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<CalendarDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Calendar")));
 
 var app = builder.Build();
 
