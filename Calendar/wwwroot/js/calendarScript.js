@@ -68,19 +68,54 @@ const renderCalendar = () => {
 
 renderCalendar();
 
-//ОБЯЗАТЕЛЬНОЕ ПОЛЕ ОБРАБОТКИ СОБЫТИЙ ЧАСОВ И ТД//
+//ОБЯЗАТЕЛЬНОЕ ПОЛЕ ОБРАБОТКИ СОБЫТИЙ ЧАСОВ И ТД///////////////////
+
+const platformCheckbox = document.getElementById("tech-checkbox");
+const platformFields = document.getElementById("platform-fields");
+const platformSelect = document.getElementById("platform-select");
+
+
+platformCheckbox.addEventListener("change", () => {
+    if (platformCheckbox.checked) {
+        platformFields.style.display = "block";
+    } else {
+        platformFields.style.display = "none";
+    }
+});
 
 bookButton.addEventListener("click", () => {
     const selectedDate = selectedDateElement.textContent;
-    const selectedTime = document.getElementById("booking-time-start").value;
-    console.log(selectedTime);
-    const selectedTimeEnd = document.getElementById("booking-time-end").value;
-    console.log(selectedTimeEnd);
-    const selectedRoom = document.getElementById("booking-room").value;
-    console.log(selectedRoom);
+    console.log("selectedDate = " + selectedDate);
 
-    // Выполните нужные действия при нажатии на кнопку "Забронировать"
-    // Например, отправка данных на сервер или другие операции
+    const selectedTime = document.getElementById("booking-time-start").value;
+    console.log("selectedTime = " + selectedTime);
+
+    const selectedTimeEnd = document.getElementById("booking-time-end").value;
+    console.log("selectedTimeEnd = " + selectedTimeEnd);
+
+    const selectedHall = document.getElementById("booking-hall").value;
+    console.log("selectedRoom = " + selectedHall);
+
+    let techCheckbox;
+    let selectedPlatform;
+
+    if (platformCheckbox.checked) {
+        techCheckbox = 1;
+        console.log(techCheckbox);
+
+        selectedPlatform = document.getElementById("platform-select").value;
+        console.log("selectedPlatform = " + selectedPlatform);
+
+    }
+    else {
+        techCheckbox = 0;
+        console.log(techCheckbox);
+
+        selectedPlatform = null;
+        console.log("selectedPlatform = " + selectedPlatform);
+    }
+
+
 });
 
 prevNextIcon.forEach((icon) => {

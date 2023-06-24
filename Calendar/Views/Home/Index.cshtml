@@ -1,5 +1,4 @@
-﻿@model List<Hall>
-
+﻿@model IndexControllerCombinedModel
 <!DOCTYPE html>
 <!-- Coding By CodingNepal - youtube.com/codingnepal -->
 <html lang="en" dir="ltr">
@@ -37,34 +36,43 @@
     </div>
     <div class="booking-panel">
         <h2>Выбранная дата: <span id="selected-date"></span></h2>
-        <label for="booking-time">Выберите время:</label>
+        <label for="booking-time-start">Выберите время начала мероприятия:</label>
         <select id="booking-time-start">
-            @for (int hour = 8; hour <= 20; hour++)
+            @for (int i = 8; i <= 20; i++)
             {
-                for (int minute = 0; minute < 60; minute += 15)
-                {
-                    @:<option"> @hour:D2:minute:D2 </option>
-                }
+                string time = $"{i:00}:00";
+                @:<option value="@time">@time</option>
             }
-            <!-- Добавьте остальные варианты времени здесь -->
         </select>
+        <label for="booking-time-end">Выберите время конца мероприятия:</label>
         <select id="booking-time-end">
-            <option value="08:00">08:00</option>
-            <option value="09:00">09:00</option>
-            <option value="10:00">10:00</option>
-            <option value="11:00">11:00</option>
-            <option value="12:00">12:00</option>
-            <option value="13:00">13:00</option>
-            <!-- Добавьте остальные варианты времени здесь -->
-        </select>
-        <label for="booking-room">Выберите зал:</label>
-        <select id="booking-room">
-            @foreach(var hall in Model) 
+            @for (int i = 8; i <= 20; i++)
             {
-                @:<option value="@hall.Name"> @hall.Name </option>
+                string time = $"{i:00}:00";
+                @:<option value="@time">@time</option>
             }
-            <!-- Добавьте остальные варианты зала здесь -->
         </select>
+        </select>
+        <label for="booking-hall">Выберите зал:</label>
+        <select id="booking-hall">
+            @foreach(Hall hall in Model.Halls) 
+            {
+                @:<option value="@hall.Id"> @hall.Name </option>
+            }
+        </select>
+        <div>
+            <label for="tech-checkbox">Техническая поддержка:</label>
+            <input type="checkbox" id="tech-checkbox">
+        </div>
+        <div id="platform-fields" style="display: none;">
+            <label for="platform-select">Выбор платформы:</label>
+            <select id="platform-select">
+                @foreach (Platform platform in Model.Platforms)
+                {
+                    @:<option value="@platform.Id"> @platform.Name </option>
+                }
+            </select>
+        </div>
         <button id="book-button">Забронировать</button>
     </div>
 </body>
