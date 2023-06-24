@@ -20,7 +20,8 @@ namespace Calendar.Controllers
         public IActionResult Index()
         {
             //Doctor doctor = _db.Doctors.First(x => x.Id == 1);
-            return View();
+            var halls = _db.Halls.OrderBy(x => x.Id).ToList();
+            return View(halls);
         }
 
         public IActionResult Privacy()

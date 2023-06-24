@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@model List<Hall>
+
+<!DOCTYPE html>
 <!-- Coding By CodingNepal - youtube.com/codingnepal -->
 <html lang="en" dir="ltr">
 <head>
@@ -37,12 +39,13 @@
         <h2>Выбранная дата: <span id="selected-date"></span></h2>
         <label for="booking-time">Выберите время:</label>
         <select id="booking-time-start">
-            <option value="08:00">08:00</option>
-            <option value="09:00">09:00</option>
-            <option value="10:00">10:00</option>
-            <option value="11:00">11:00</option>
-            <option value="12:00">12:00</option>
-            <option value="13:00">13:00</option>
+            @for (int hour = 8; hour <= 20; hour++)
+            {
+                for (int minute = 0; minute < 60; minute += 15)
+                {
+                    @:<option"> @hour:D2:minute:D2 </option>
+                }
+            }
             <!-- Добавьте остальные варианты времени здесь -->
         </select>
         <select id="booking-time-end">
@@ -56,9 +59,10 @@
         </select>
         <label for="booking-room">Выберите зал:</label>
         <select id="booking-room">
-            <option value="Зал 1">Зал 1</option>
-            <option value="Зал 2">Зал 2</option>
-            <option value="Зал 3">Зал 3</option>
+            @foreach(var hall in Model) 
+            {
+                @:<option value="@hall.Name"> @hall.Name </option>
+            }
             <!-- Добавьте остальные варианты зала здесь -->
         </select>
         <button id="book-button">Забронировать</button>

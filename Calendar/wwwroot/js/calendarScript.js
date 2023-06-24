@@ -68,6 +68,8 @@ const renderCalendar = () => {
 
 renderCalendar();
 
+//ОБЯЗАТЕЛЬНОЕ ПОЛЕ ОБРАБОТКИ СОБЫТИЙ ЧАСОВ И ТД//
+
 bookButton.addEventListener("click", () => {
     const selectedDate = selectedDateElement.textContent;
     const selectedTime = document.getElementById("booking-time-start").value;
@@ -75,6 +77,7 @@ bookButton.addEventListener("click", () => {
     const selectedTimeEnd = document.getElementById("booking-time-end").value;
     console.log(selectedTimeEnd);
     const selectedRoom = document.getElementById("booking-room").value;
+    console.log(selectedRoom);
 
     // Выполните нужные действия при нажатии на кнопку "Забронировать"
     // Например, отправка данных на сервер или другие операции
