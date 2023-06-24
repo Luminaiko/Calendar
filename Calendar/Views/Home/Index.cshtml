@@ -28,18 +28,40 @@
                 <li>Сре</li>
                 <li>Чет</li>
                 <li>Пят</li>
-                <li>Суб</li>
-                @*<li>Sun</li>
-                <li>Mon</li>
-                <li>Tue</li>
-                <li>Wed</li>
-                <li>Thu</li>
-                <li>Fri</li>
-                <li>Sat</li>*@
+                <li>Суб</li>    
             </ul>
             <ul class="days"></ul>
         </div>
     </div>
-
+    <div class="booking-panel">
+        <h2>Выбранная дата: <span id="selected-date"></span></h2>
+        <label for="booking-time">Выберите время:</label>
+        <select id="booking-time-start">
+            <option value="08:00">08:00</option>
+            <option value="09:00">09:00</option>
+            <option value="10:00">10:00</option>
+            <option value="11:00">11:00</option>
+            <option value="12:00">12:00</option>
+            <option value="13:00">13:00</option>
+            <!-- Добавьте остальные варианты времени здесь -->
+        </select>
+        <select id="booking-time-end">
+            <option value="08:00">08:00</option>
+            <option value="09:00">09:00</option>
+            <option value="10:00">10:00</option>
+            <option value="11:00">11:00</option>
+            <option value="12:00">12:00</option>
+            <option value="13:00">13:00</option>
+            <!-- Добавьте остальные варианты времени здесь -->
+        </select>
+        <label for="booking-room">Выберите зал:</label>
+        <select id="booking-room">
+            <option value="Зал 1">Зал 1</option>
+            <option value="Зал 2">Зал 2</option>
+            <option value="Зал 3">Зал 3</option>
+            <!-- Добавьте остальные варианты зала здесь -->
+        </select>
+        <button id="book-button">Забронировать</button>
+    </div>
 </body>
 </html>
