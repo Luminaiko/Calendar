@@ -20,9 +20,6 @@ namespace Calendar.Controllers
 
         public IActionResult Index()
         {
-            ////Doctor doctor = _db.Doctors.First(x => x.Id == 1);
-            //List<Hall> halls= _db.Halls.OrderBy(x => x.Id).ToList();
-
             IndexControllerCombinedModel model = new IndexControllerCombinedModel
             {
                 Halls = _db.Halls.OrderBy(x => x.Id).ToList(),
@@ -87,16 +84,6 @@ namespace Calendar.Controllers
                     })
                 .OrderBy(e => e.TimeStart)
                 .ToList();
-
-            //var events = _db.Events
-            //    .Where(e => e.DateStart.Date == selectedDate.Date)
-            //    .Select(e => new
-            //    {
-            //        e.TimeStart,
-            //        e.TimeEnd,
-            //        e.HallId
-            //    })
-            //    .ToList();
 
             return Json(events);
         }
