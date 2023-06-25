@@ -19,24 +19,33 @@ body {
 }
 
 .wrapper {
-    width: 450px;
+    display: flex;
     background: #fff;
     border-radius: 10px;
-    align-content:center;
 }
 
-    .wrapper header {
-        display: flex;
-        align-items: center;
-        padding: 25px 30px 10px;
-        justify-content: space-between;
-    }
+.sidebar {
+    width: 500px;
+    padding: 20px;
+}
 
-header .icons {
+.content {
+    flex-grow: 1;
+    padding: 20px;
+}
+
+.sidebar header {
+    display: flex;
+    align-items: center;
+    padding-bottom: 10px;
+    justify-content: space-between;
+}
+
+.sidebar .icons {
     display: flex;
 }
 
-    header .icons span {
+    .sidebar .icons span {
         height: 38px;
         width: 38px;
         margin: 0 1px;
@@ -49,15 +58,15 @@ header .icons {
         border-radius: 50%;
     }
 
-.icons span:last-child {
-    margin-right: -10px;
-}
+        .sidebar .icons span:last-child {
+            margin-right: -10px;
+        }
 
-header .icons span:hover {
-    background: #f2f2f2;
-}
+        .sidebar .icons span:hover {
+            background: #f2f2f2;
+        }
 
-header .current-date {
+.sidebar .current-date {
     font-size: 1.45rem;
     font-weight: 500;
 }
@@ -122,11 +131,18 @@ header .current-date {
 .days li:not(.active):hover::before {
     background: #f2f2f2;
 }
-.booking-panel {
-    width: auto;
+
+.event-list {
     margin-top: 20px;
     padding: 10px;
     border: 1px solid #ccc;
+}
+
+.booking-panel {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 10px;
 }
 
     .booking-panel h2 {

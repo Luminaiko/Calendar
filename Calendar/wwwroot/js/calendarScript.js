@@ -221,17 +221,24 @@ const fetchEvents = (selectedDate, currMonth, currYear) => {
     fetch(url)
         .then(response => response.json())
         .then(data => {
-            // Очистка списка событий
-            eventList.innerHTML = "";
+            const eventTable = document.querySelector(".event-table");
+            eventTable.innerHTML = ""; // Очистка содержимого таблицы
 
-            // Добавление событий в список
             data.forEach(event => {
-                const listItem = document.createElement("li");
-                listItem.innerHTML = `
-                    <div class="event-time">${event.timeStart} - ${event.timeEnd}</div>
-                    <div class="event-description">${event.hallName}</div>
-                `;
-                eventList.appendChild(listItem);
+                const row = document.createElement("tr");
+                const timeStartCell = document.createElement("td");
+                const timeEndCell = document.createElement("td");
+                const hallCell = document.createElement("td");
+
+                timeStartCell.textContent = event.timeStart;
+                timeEndCell.textContent = event.timeEnd;
+                hallCell.textContent = event.hallName;
+
+                row.appendChild(timeStartCell);
+                row.appendChild(timeEndCell);
+                row.appendChild(hallCell);
+
+                eventTable.appendChild(row);
             });
         })
         .catch(error => console.error(error));
