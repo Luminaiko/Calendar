@@ -1,5 +1,6 @@
 ﻿using Calendar.Data;
 using Calendar.Models;
+using Calendar.Models.Wrappers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections;
@@ -29,8 +30,31 @@ namespace Calendar.Controllers
             };
 
 
-
             return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult AddEvent([FromBody] EventWrapper addedEvent)
+        {
+            Event newEvent = new Event
+            {
+                DateStart = addedEvent.Date,
+                TimeStart = TimeSpan.Parse(addedEvent.TimeStart),
+                TimeEnd = TimeSpan.Parse(addedEvent.TimeEnd),
+            };
+
+            if (addedEvent.TechSupport == 1)
+            {
+                newEvent.Support = true;
+            }
+            else
+                newEvent.Support = false;
+
+            //if (addedEvent.PlatformId == 0)
+            //    newEvent.PlatformId = 0;
+            //else
+            //    newEvent.Support = false;
+            return Json(1);
         }
 
         public IActionResult Privacy()

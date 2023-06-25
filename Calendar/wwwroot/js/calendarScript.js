@@ -94,7 +94,7 @@ bookButton.addEventListener("click", () => {
     console.log("selectedTimeEnd = " + selectedTimeEnd);
 
     const selectedHall = document.getElementById("booking-hall").value;
-    console.log("selectedRoom = " + selectedHall);
+    console.log("selectedHall = " + selectedHall);
 
     let techCheckbox;
     let selectedPlatform;
@@ -111,10 +111,57 @@ bookButton.addEventListener("click", () => {
         techCheckbox = 0;
         console.log(techCheckbox);
 
-        selectedPlatform = null;
+        selectedPlatform = 0;
         console.log("selectedPlatform = " + selectedPlatform);
     }
 
+
+    //Правильно конвертированная дата
+    const dateParts = selectedDate.split(" ");
+    const month = months.indexOf(dateParts[1]);
+    const day = parseInt(dateParts[0]);
+    const year = parseInt(dateParts[2]);
+    const timeZoneOffset = new Date().getTimezoneOffset();
+    // Apply the time zone offset to adjust the date
+    const adjustedDate = new Date(year, month, day + 1);
+    adjustedDate.setMinutes(adjustedDate.getMinutes() + timeZoneOffset);
+
+    const selectedDateTime = adjustedDate.toISOString(); //Работающая дата в формате DateTime
+
+
+    // Создание объекта с данными для отправки на сервер
+    const eventData = {
+        Date: selectedDateTime,
+        TimeStart: String(selectedTime),
+        TimeEnd: String(selectedTimeEnd),
+        TechSupport: techCheckbox,
+        PlatformId: parseInt(selectedPlatform),
+        BroadcastId: 1,
+        HallId: selectedHall
+    };
+
+    // Опции для запроса
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(eventData)
+    };
+
+    // Выполнение запроса
+    fetch('/Home/AddEvent', requestOptions)
+        .then(response => {
+            if (response.ok) {
+                // Обработка успешного ответа от сервера
+                console.log('Event added successfully.');
+            } else {
+                // Обработка ошибки
+                console.error('Error adding event.');
+            }
+        })
+        .catch(error => {
+            // Обработка ошибки
+            console.error(error);
+        });
 
 });
 
