@@ -15,6 +15,7 @@ body {
     justify-content: center;
     min-height: 100vh;
     background: #9B59B6;
+    justify-content: center
 }
 
 .wrapper {
@@ -22,6 +23,7 @@ body {
     background: #fff;
     border-radius: 10px;
     box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+    align-content:center;
 }
 
     .wrapper header {
@@ -121,3 +123,35 @@ header .current-date {
 .days li:not(.active):hover::before {
     background: #f2f2f2;
 }
+.booking-panel {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+    .booking-panel h2 {
+        margin-bottom: 10px;
+    }
+
+    .booking-panel label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .booking-panel select {
+        width: 100%;
+        padding: 5px;
+        margin-bottom: 10px;
+    }
+
+    .booking-panel button {
+        padding: 5px 10px;
+        background-color: #4CAF50;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+    }
+
+        .booking-panel button:hover {
+            background-color: #45a049;
+        }

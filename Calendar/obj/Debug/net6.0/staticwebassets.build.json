@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "L6dzudqnv0T3Rm5R0FVEVkFekQ/ORIBLBSyfsOgFhVQ=",
+  "Hash": "OCJWLoCns4keiSVbJoxYTSWg5pounssNwne0BiPyeaA=",
   "Source": "Calendar",
   "BasePath": "_content/Calendar",
   "Mode": "Default",
@@ -100,6 +100,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "E:\\TestCalendar\\Calendar\\Calendar\\wwwroot\\js\\calendarScript.js",
+      "SourceId": "Calendar",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\TestCalendar\\Calendar\\Calendar\\wwwroot\\",
+      "BasePath": "_content/Calendar",
+      "RelativePath": "js/calendarScript.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\calendarScript.js"
     },
     {
       "Identity": "E:\\TestCalendar\\Calendar\\Calendar\\wwwroot\\js\\site.js",
