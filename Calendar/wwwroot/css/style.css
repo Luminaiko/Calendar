@@ -22,7 +22,6 @@ body {
     width: 450px;
     background: #fff;
     border-radius: 10px;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.12);
     align-content:center;
 }
 
@@ -124,6 +123,7 @@ header .current-date {
     background: #f2f2f2;
 }
 .booking-panel {
+    width: auto;
     margin-top: 20px;
     padding: 10px;
     border: 1px solid #ccc;
@@ -139,7 +139,7 @@ header .current-date {
     }
 
     .booking-panel select {
-        width: 100%;
+        width: 300px;
         padding: 5px;
         margin-bottom: 10px;
     }

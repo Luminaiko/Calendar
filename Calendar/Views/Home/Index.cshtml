@@ -1,38 +1,36 @@
 ﻿@model IndexControllerCombinedModel
 <!DOCTYPE html>
-<!-- Coding By CodingNepal - youtube.com/codingnepal -->
 <html lang="en" dir="ltr">
 <head>
     <meta charset="utf-8">
-    <title>Dynamic Calendar JavaScript | CodingNepal</title>
+    <title>Динамичный календарь!</title>
     <link rel="stylesheet" href="style.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Google Font Link for Icons -->
     <link rel="stylesheet" href="~/css/site.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="script.js" defer></script>
 </head>
 <body>
     <script src="~/js/calendarScript.js" defer></script>
     <div class="wrapper">
-        <header>
-            <p class="current-date"></p>
-            <div class="icons">
-                <span id="prev" class="material-symbols-rounded"><</span>
-                <span id="next" class="material-symbols-rounded">></span>
+        <div class="calendar-wrapper">
+            <header>
+                <p class="current-date"></p>
+                <div class="icons">
+                    <span id="prev" class="material-symbols-rounded"><</span>
+                    <span id="next" class="material-symbols-rounded">></span>
+                </div>
+            </header>
+            <div class="calendar">
+                <ul class="weeks">
+                    <li>Вск</li>
+                    <li>Пон</li>
+                    <li>Втр</li>
+                    <li>Сре</li>
+                    <li>Чет</li>
+                    <li>Пят</li>
+                    <li>Суб</li>    
+                </ul>
+                <ul class="days"></ul>
             </div>
-        </header>
-        <div class="calendar">
-            <ul class="weeks">
-                <li>Вск</li>
-                <li>Пон</li>
-                <li>Втр</li>
-                <li>Сре</li>
-                <li>Чет</li>
-                <li>Пят</li>
-                <li>Суб</li>    
-            </ul>
-            <ul class="days"></ul>
         </div>
     </div>
     <div class="booking-panel">
@@ -87,6 +85,9 @@
             </select>
         </div>
         <button id="book-button">Забронировать</button>
+    </div>
+    <div id="event-list">
+        <ul id="event-list-container"></ul>
     </div>
 </body>
 </html>

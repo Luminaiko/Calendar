@@ -51,22 +51,53 @@ namespace Calendar.Controllers
                 newEvent.Support = true;
             }
             else
+            {
                 newEvent.Support = false;
+            }
 
             if (addedEvent.PlatformId == 0)
             {
-                newEvent.PlatformId = 0;
-                newEvent.BroadcastId = 0;
+                newEvent.PlatformId = null;
+                newEvent.BroadcastId = null;
             }
             else
             {
                 newEvent.PlatformId = addedEvent.PlatformId;
                 newEvent.BroadcastId = addedEvent.BroadcastId;
             }
+
             _db.Add(newEvent);
             _db.SaveChanges();
 
-            return Json(1);
+            return Ok();
+        }
+
+        public IActionResult GetEvents(DateTime selectedDate)
+        {
+            var events = _db.Events
+                .Where(e => e.DateStart.Date == selectedDate.Date)
+                .Join(_db.Halls,
+                    e => e.HallId,
+                    h => h.Id,
+                    (e, h) => new
+                    {
+                        e.TimeStart,
+                        e.TimeEnd,
+                        HallName = h.Name
+                    })
+                .ToList();
+
+            //var events = _db.Events
+            //    .Where(e => e.DateStart.Date == selectedDate.Date)
+            //    .Select(e => new
+            //    {
+            //        e.TimeStart,
+            //        e.TimeEnd,
+            //        e.HallId
+            //    })
+            //    .ToList();
+
+            return Json(events);
         }
 
         public IActionResult Privacy()

@@ -61,9 +61,23 @@ const renderCalendar = () => {
                 const selectedDate = day.textContent;
                 const selectedMonth = months[currMonth];
                 selectedDateElement.textContent = `${selectedDate} ${selectedMonth} ${currYear}`;
+
+                //По клику посмотреть время на которое занято
+                days.forEach(day => {
+                    day.addEventListener("click", () => {
+                        if (!day.classList.contains("inactive")) {
+                            const selectedDate = day.textContent;
+                            const selectedMonth = months[currMonth];
+                            selectedDateElement.textContent = `${selectedDate} ${selectedMonth} ${currYear}`;
+                            fetchEvents(selectedDate, currMonth, currYear);
+                        }
+                    });
+                });
             }
         });
     });
+
+
 };
 
 renderCalendar();
@@ -196,3 +210,29 @@ prevNextIcon.forEach((icon) => {
         renderCalendar();
     });
 });
+
+const eventList = document.getElementById("event-list-container");
+
+const fetchEvents = (selectedDate, currMonth, currYear) => {
+    const month = currMonth + 1;
+    const formattedDate = `${currYear}-${month < 10 ? '0' + month : month}-${selectedDate < 10 ? '0' + selectedDate : selectedDate}`;
+    const url = `/Home/GetEvents?selectedDate=${formattedDate}`;
+
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            // Очистка списка событий
+            eventList.innerHTML = "";
+
+            // Добавление событий в список
+            data.forEach(event => {
+                const listItem = document.createElement("li");
+                listItem.innerHTML = `
+                    <div class="event-time">${event.timeStart} - ${event.timeEnd}</div>
+                    <div class="event-description">${event.hallName}</div>
+                `;
+                eventList.appendChild(listItem);
+            });
+        })
+        .catch(error => console.error(error));
+};
