@@ -70,13 +70,24 @@ renderCalendar();
 
 //ОБЯЗАТЕЛЬНОЕ ПОЛЕ ОБРАБОТКИ СОБЫТИЙ ЧАСОВ И ТД///////////////////
 
-const platformCheckbox = document.getElementById("tech-checkbox");
+const broadcastCheckBox = document.getElementById("broadcast-checkbox");
 const platformFields = document.getElementById("platform-fields");
 const platformSelect = document.getElementById("platform-select");
+const techSupportCheckBox = document.getElementById("tech-checkbox");
 
 
-platformCheckbox.addEventListener("change", () => {
-    if (platformCheckbox.checked) {
+techSupportCheckBox.addEventListener("change", () => {
+    if (techSupportCheckBox.checked) {
+        techSupport = 1;
+        console.log(techSupport + "pressed");
+    } else {
+        techSupport = 0;
+        console.log(techSupport + "not pressed");
+    }
+})
+
+broadcastCheckBox.addEventListener("change", () => {
+    if (broadcastCheckBox.checked) {
         platformFields.style.display = "block";
     } else {
         platformFields.style.display = "none";
@@ -96,25 +107,24 @@ bookButton.addEventListener("click", () => {
     const selectedHall = document.getElementById("booking-hall").value;
     console.log("selectedHall = " + selectedHall);
 
-    let techCheckbox;
+    let techSupport;
     let selectedPlatform;
 
-    if (platformCheckbox.checked) {
-        techCheckbox = 1;
-        console.log(techCheckbox);
+    if (techSupportCheckBox.checked) {
+        techSupport = 1;
+        console.log("tech support = " + techSupport)
+    } else {
+        techSupport = 0;
+        console.log("tech support = " + techSupport)
+    }
 
+    if (broadcastCheckBox.checked) {
         selectedPlatform = document.getElementById("platform-select").value;
         console.log("selectedPlatform = " + selectedPlatform);
-
-    }
-    else {
-        techCheckbox = 0;
-        console.log(techCheckbox);
-
+    } else {
         selectedPlatform = 0;
         console.log("selectedPlatform = " + selectedPlatform);
     }
-
 
     //Правильно конвертированная дата
     const dateParts = selectedDate.split(" ");
@@ -134,7 +144,7 @@ bookButton.addEventListener("click", () => {
         Date: selectedDateTime,
         TimeStart: String(selectedTime),
         TimeEnd: String(selectedTimeEnd),
-        TechSupport: techCheckbox,
+        TechSupport: techSupport,
         PlatformId: parseInt(selectedPlatform),
         BroadcastId: 1,
         HallId: selectedHall
