@@ -1,40 +1,57 @@
-﻿@model IndexControllerCombinedModel
-<!DOCTYPE html>
-<!-- Coding By CodingNepal - youtube.com/codingnepal -->
+﻿<!DOCTYPE html>
 <html lang="en" dir="ltr">
+
 <head>
     <meta charset="utf-8">
-    <title>Dynamic Calendar JavaScript | CodingNepal</title>
+    <title>Динамичный календарь</title>
     <link rel="stylesheet" href="style.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Google Font Link for Icons -->
     <link rel="stylesheet" href="~/css/site.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="script.js" defer></script>
 </head>
+
 <body>
     <script src="~/js/calendarScript.js" defer></script>
     <div class="wrapper">
-        <header>
-            <p class="current-date"></p>
-            <div class="icons">
-                <span id="prev" class="material-symbols-rounded"><</span>
-                <span id="next" class="material-symbols-rounded">></span>
+        <div class="sidebar">
+            <div class="calendar-wrapper">
+                <header>
+                    <p class="current-date"></p>
+                    <div class="icons">
+                        <span id="prev" class="material-symbols-rounded">&lt;</span>
+                        <span id="next" class="material-symbols-rounded">&gt;</span>
+                    </div>
+                </header>
+                <div class="calendar">
+                    <ul class="weeks">
+                        <li>Вск</li>
+                        <li>Пон</li>
+                        <li>Втр</li>
+                        <li>Сре</li>
+                        <li>Чет</li>
+                        <li>Пят</li>
+                        <li>Суб</li>
+                    </ul>
+                    <ul class="days"></ul>
+                </div>
             </div>
-        </header>
-        <div class="calendar">
-            <ul class="weeks">
-                <li>Вск</li>
-                <li>Пон</li>
-                <li>Втр</li>
-                <li>Сре</li>
-                <li>Чет</li>
-                <li>Пят</li>
-                <li>Суб</li>    
-            </ul>
-            <ul class="days"></ul>
+        </div>
+        <div class="content">
+            <div class="event-list">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Время начала</th>
+                            <th>Время конца</th>
+                            <th>Комната</th>
+                        </tr>
+                    </thead>
+                    <tbody class="event-table">
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
+
     <div class="booking-panel">
         <h2>Выбранная дата: <span id="selected-date"></span></h2>
         <label for="booking-time-start">Выберите время начала мероприятия:</label>
@@ -42,7 +59,8 @@
             @for (int i = 8; i <= 20; i++)
             {
                 string time = $"{i:00}:00";
-                @:<option value="@time">@time</option>
+                @:
+                <option value="@time">@time</option>
             }
         </select>
         <label for="booking-time-end">Выберите время конца мероприятия:</label>
@@ -50,31 +68,47 @@
             @for (int i = 8; i <= 20; i++)
             {
                 string time = $"{i:00}:00";
-                @:<option value="@time">@time</option>
+                @:
+                <option value="@time">@time</option>
             }
         </select>
         </select>
         <label for="booking-hall">Выберите зал:</label>
         <select id="booking-hall">
-            @foreach(Hall hall in Model.Halls) 
+            @foreach (Hall hall in Model.Halls)
             {
-                @:<option value="@hall.Id"> @hall.Name </option>
+                @:
+                <option value="@hall.Id" id="hall+@hall.Id">@hall.Name</option>
             }
         </select>
         <div>
             <label for="tech-checkbox">Техническая поддержка:</label>
             <input type="checkbox" id="tech-checkbox">
+
+            <label for="broadcast-checkbox">Видеотрансляция:</label>
+            <input type="checkbox" id="broadcast-checkbox">
         </div>
         <div id="platform-fields" style="display: none;">
             <label for="platform-select">Выбор платформы:</label>
             <select id="platform-select">
                 @foreach (Platform platform in Model.Platforms)
                 {
-                    @:<option value="@platform.Id"> @platform.Name </option>
+                    @:
+                    <option value="@platform.Id"> @platform.Name </option>
+                }
+            </select>
+
+            <label for="broadcast-select">Выбор куда транслировать:</label>
+            <select id="broadcast-select">
+                @foreach (Broadcast broadcast in Model.Broadcasts)
+                {
+                    @:
+                    <option value="@broadcast.Id"> @broadcast.Name </option>
                 }
             </select>
         </div>
         <button id="book-button">Забронировать</button>
     </div>
 </body>
+
 </html>

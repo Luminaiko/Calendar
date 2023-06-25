@@ -20,13 +20,12 @@ namespace Calendar.Controllers
 
         public IActionResult Index()
         {
-            //Doctor doctor = _db.Doctors.First(x => x.Id == 1);
-            List<Hall> halls= _db.Halls.OrderBy(x => x.Id).ToList();
-
             IndexControllerCombinedModel model = new IndexControllerCombinedModel
             {
                 Halls = _db.Halls.OrderBy(x => x.Id).ToList(),
-                Platforms = _db.Platforms.OrderBy(x => x.Id).ToList()
+                Platforms = _db.Platforms.OrderBy(x => x.Id).ToList(),
+                Broadcasts = _db.Broadcasts.OrderBy(x => x.Id).ToList()
+                
             };
 
 
@@ -41,6 +40,7 @@ namespace Calendar.Controllers
                 DateStart = addedEvent.Date,
                 TimeStart = TimeSpan.Parse(addedEvent.TimeStart),
                 TimeEnd = TimeSpan.Parse(addedEvent.TimeEnd),
+                HallId = addedEvent.HallId
             };
 
             if (addedEvent.TechSupport == 1)
@@ -48,13 +48,44 @@ namespace Calendar.Controllers
                 newEvent.Support = true;
             }
             else
+            {
                 newEvent.Support = false;
+            }
 
-            //if (addedEvent.PlatformId == 0)
-            //    newEvent.PlatformId = 0;
-            //else
-            //    newEvent.Support = false;
-            return Json(1);
+            if (addedEvent.PlatformId == 0)
+            {
+                newEvent.PlatformId = null;
+                newEvent.BroadcastId = null;
+            }
+            else
+            {
+                newEvent.PlatformId = addedEvent.PlatformId;
+                newEvent.BroadcastId = addedEvent.BroadcastId;
+            }
+
+            _db.Add(newEvent);
+            _db.SaveChanges();
+
+            return Ok();
+        }
+
+        public IActionResult GetEvents(DateTime selectedDate)
+        {
+            var events = _db.Events
+                .Where(e => e.DateStart.Date == selectedDate.Date)
+                .Join(_db.Halls,
+                    e => e.HallId,
+                    h => h.Id,
+                    (e, h) => new
+                    {
+                        e.TimeStart,
+                        e.TimeEnd,
+                        HallName = h.Name
+                    })
+                .OrderBy(e => e.TimeStart)
+                .ToList();
+
+            return Json(events);
         }
 
         public IActionResult Privacy()
