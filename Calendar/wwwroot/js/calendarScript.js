@@ -109,6 +109,7 @@ bookButton.addEventListener("click", () => {
 
     let techSupport;
     let selectedPlatform;
+    let selectedBroadcast;
 
     if (techSupportCheckBox.checked) {
         techSupport = 1;
@@ -121,9 +122,15 @@ bookButton.addEventListener("click", () => {
     if (broadcastCheckBox.checked) {
         selectedPlatform = document.getElementById("platform-select").value;
         console.log("selectedPlatform = " + selectedPlatform);
+
+        selectedBroadcast = document.getElementById("broadcast-select").value;
+        console.log("selectedBroadcast = " + selectedBroadcast);
     } else {
         selectedPlatform = 0;
         console.log("selectedPlatform = " + selectedPlatform);
+
+        selectedBroadcast = 0;
+        console.log("selectedBroadcast = " + selectedBroadcast);
     }
 
     //Правильно конвертированная дата
@@ -146,7 +153,7 @@ bookButton.addEventListener("click", () => {
         TimeEnd: String(selectedTimeEnd),
         TechSupport: techSupport,
         PlatformId: parseInt(selectedPlatform),
-        BroadcastId: 1,
+        BroadcastId: selectedBroadcast,
         HallId: selectedHall
     };
 

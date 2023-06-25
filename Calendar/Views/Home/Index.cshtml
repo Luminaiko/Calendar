@@ -76,6 +76,15 @@
                     @:<option value="@platform.Id"> @platform.Name </option>
                 }
             </select>
+
+            <label for="broadcast-select">Выбор куда транслировать:</label>
+            <select id="broadcast-select">
+                @foreach (Broadcast broadcast in Model.Broadcasts)
+                {
+                    @:
+                    <option value="@broadcast.Id"> @broadcast.Name </option>
+                }
+            </select>
         </div>
         <button id="book-button">Забронировать</button>
     </div>
