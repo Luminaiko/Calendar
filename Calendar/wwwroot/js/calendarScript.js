@@ -109,6 +109,7 @@ broadcastCheckBox.addEventListener("change", () => {
 });
 
 bookButton.addEventListener("click", () => {
+
     const selectedDate = selectedDateElement.textContent;
     console.log("selectedDate = " + selectedDate);
 
@@ -120,6 +121,14 @@ bookButton.addEventListener("click", () => {
 
     const selectedHall = document.getElementById("booking-hall").value;
     console.log("selectedHall = " + selectedHall);
+
+    const selectedHallByName = document.getElementById("hall+" + selectedHall).innerHTML;
+
+    // Проверка доступности бронирования
+    if (!checkBookingAvailability(selectedTime, selectedTimeEnd, selectedHallByName)) {
+        console.log("Booking not available for the selected time and hall.");
+        return; // Прерываем выполнение функции, если бронирование недоступно
+    }
 
     let techSupport;
     let selectedPlatform;
@@ -147,6 +156,7 @@ bookButton.addEventListener("click", () => {
         console.log("selectedBroadcast = " + selectedBroadcast);
     }
 
+
     //Правильно конвертированная дата
     const dateParts = selectedDate.split(" ");
     const month = months.indexOf(dateParts[1]);
@@ -159,6 +169,7 @@ bookButton.addEventListener("click", () => {
 
     const selectedDateTime = adjustedDate.toISOString(); //Работающая дата в формате DateTime
 
+    
 
     // Создание объекта с данными для отправки на сервер
     const eventData = {
@@ -243,3 +254,29 @@ const fetchEvents = (selectedDate, currMonth, currYear) => {
         })
         .catch(error => console.error(error));
 };
+
+const checkBookingAvailability = (selectedTime, selectedTimeEnd, selectedHall) => {
+    const eventTable = document.querySelector(".event-table");
+    const rows = eventTable.querySelectorAll("tr");
+
+    for (let i = 0; i < rows.length; i++) {
+        const row = rows[i];
+        const timeStartCell = row.querySelector("td:first-child");
+        const timeEndCell = row.querySelector("td:nth-child(2)");
+        const hallCell = row.querySelector("td:nth-child(3)");
+
+        const eventTimeStart = timeStartCell.textContent;
+        const eventTimeEnd = timeEndCell.textContent;
+        const eventHall = hallCell.textContent;
+
+        console.log(selectedTime === eventTimeStart);
+        if (selectedHall === eventHall) {
+            // Проверка пересечения комнаты
+            if ((selectedTimeEnd > eventTimeEnd) || (selectedTime > eventTimeStart && selectedTimeEnd <= eventTimeEnd)) { 
+                return false; // Бронирование недоступно
+            }
+        }
+    }
+
+    return true; // Бронирование доступно
+}; 

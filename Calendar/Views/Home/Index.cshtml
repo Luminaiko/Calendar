@@ -79,7 +79,7 @@
             @foreach (Hall hall in Model.Halls)
             {
                 @:
-                <option value="@hall.Id"> @hall.Name </option>
+                <option value="@hall.Id" id="hall+@hall.Id">@hall.Name</option>
             }
         </select>
         <div>

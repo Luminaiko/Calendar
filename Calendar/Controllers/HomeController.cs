@@ -85,7 +85,7 @@ namespace Calendar.Controllers
                         e.TimeEnd,
                         HallName = h.Name
                     })
-                .OrderBy(e => e.HallName)
+                .OrderBy(e => e.TimeStart)
                 .ToList();
 
             //var events = _db.Events
